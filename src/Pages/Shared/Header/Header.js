@@ -20,7 +20,7 @@ const Header = () => {
             <Link type="button" className='btn btn-light' to='/addservice'>Add Service</Link>
           </Nav>
           <Nav>
-            <Link type="button" className='btn btn-light' href="#deets">Login</Link>
+            <Link type="button" className='btn btn-light' to='/login'>Login</Link>
             <Link type="button" className='btn btn-light' eventKey={2} href="#memes">
               Log Out
             </Link>
