@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import Slider1 from '../../assets/slider/Slider1.png';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Form, Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 
@@ -54,16 +54,26 @@ const ServiceDetails = () => {
                         </Card.Text>
                     </Card.Body>
                 </Card>
-                <div className='py-3'>
+                <div className='p-3 mt-5 border border-secondary'>
                     {
                         user?.uid ?
-                            <form class="form-floating ">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                <label for="floatingTextarea">Comments</label>
-                                <div className='d-flex justify-content-center my-2'>
-                                    <Button type="submit" className="btn  btn-primary btn-block mb-4">Submit</Button>
-                                </div>
-                            </form>
+                            <>
+                            <h4 className='text-center'>Add a review</h4>
+                            <form className="form-floating ">
+                               
+                               <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                               <label for="floatingTextarea">Write your Comments</label>
+                               <input className='w-100 mt-2 p-2 me-2' type="email" name="email" id=""  defaultValue={user.email} readOnly  disabled/>
+                               <input className='w-100 mt-2 p-2' type="email" name="email" id=""  defaultValue={user.displayName} readOnly  disabled/> <br />
+                               <input className='w-100 mt-2 p-2 me-2' type="text" name="service" id=""  placeholder='service name'
+                               readOnly required />
+                               <input className='w-100 mt-2 p-2' type="text" name="service" id=""  placeholder='Service id'
+                               readOnly required />
+                               <div className='d-flex justify-content-center my-2'>
+                                   <Button type="submit" className="btn  btn-primary btn-block mb-4">Submit</Button>
+                               </div>
+                           </form>
+                            </>
                             :
                             <>
                                 <h4 className='text-center py-3'>Please <Link to='/login'>login</Link> to add review</h4>
