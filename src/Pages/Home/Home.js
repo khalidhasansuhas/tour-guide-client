@@ -1,16 +1,15 @@
-import React, { useContext } from 'react';
+import React, {  } from 'react';
 import { Button, Card, Carousel, ListGroup } from 'react-bootstrap';
 import Slider2 from '../../assets/slider/Slider2.jpg';
 import Slider3 from '../../assets/slider/Slider3.jpg';
 import Slider4 from '../../assets/slider/Slider4.jpg';
 import Slider5 from '../../assets/slider/Slider5.jpg';
 import Slider1 from '../../assets/slider/Slider1.png';
-import { Link } from 'react-router-dom';
-import { ServiceContext } from '../../layout/Main';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Home = () => {
 
-    const services = useContext(ServiceContext)
+    const services = useLoaderData()
 
     return (
         <>
@@ -63,7 +62,7 @@ const Home = () => {
                     {
                         services.map(service => {
                             return (<Card className='me-3 mb-3 ' style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={service.photoURL} />
+                                <Card.Img variant="top" src={service.image} />
                                 <Card.Body>
                                     <Card.Title>Package: {service.serviceName}</Card.Title>
                                     <Card.Text>
@@ -78,7 +77,7 @@ const Home = () => {
                                 <Card.Body>
 
                                     <div className='w-full d-flex justify-content-center'>
-                                        <Link to='/servicedetails'><Button variant="primary">Take My Service</Button></Link>
+                                        <Link to={`/services/${service._id}`}><Button variant="primary">View Details</Button></Link>
                                     </div>
                                 </Card.Body>
                             </Card>)
