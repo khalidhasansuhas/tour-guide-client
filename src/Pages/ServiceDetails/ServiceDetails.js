@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import Slider1 from '../../assets/slider/Slider1.png';
 import Card from 'react-bootstrap/Card';
-import { Form, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 
