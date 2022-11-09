@@ -21,15 +21,14 @@ export const routes = createBrowserRouter([
         children:[
             {
                 path:'/',
-                element:<Home></Home>
+                element:<Home></Home>,
+                loader:()=> fetch('http://localhost:5000/servicesLimit')
             },
             {
                 path:'/home',
                 element:<Home></Home>,
-                loader: async ()=>{
-
-                    return  fetch('http://localhost:5000/servicesLimit')
-                  }
+                loader:()=> fetch('http://localhost:5000/servicesLimit')
+                
             },
             {
                 path:'/services',
