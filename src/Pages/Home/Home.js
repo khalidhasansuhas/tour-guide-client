@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card, Carousel, ListGroup } from 'react-bootstrap';
 import Slider2 from '../../assets/slider/Slider2.jpg';
 import Slider3 from '../../assets/slider/Slider3.jpg';
@@ -6,8 +6,12 @@ import Slider4 from '../../assets/slider/Slider4.jpg';
 import Slider5 from '../../assets/slider/Slider5.jpg';
 import Slider1 from '../../assets/slider/Slider1.png';
 import { Link } from 'react-router-dom';
+import { ServiceContext } from '../../layout/Main';
 
 const Home = () => {
+
+    const services = useContext(ServiceContext)
+
     return (
         <>
             <Carousel className='my-5 ' style={{ height: '200' }}>
@@ -56,64 +60,30 @@ const Home = () => {
             <div className='w-full d-flex'>
                 <div className='d-flex flex-wrap w-full mx-auto'>
 
-                    <Card className='me-3 ' style={{ width: '16rem' }}>
-                        <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </Card.Text>
-                        </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                        </ListGroup>
-                        <Card.Body>
-                            <Card.Link href="#">Card Link</Card.Link>
-                            <Card.Link href="#">Another Link</Card.Link>
-                        </Card.Body>
-                    </Card>
-                    <Card className='me-3 ' style={{ width: '16rem' }}>
-                        <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </Card.Text>
-                        </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                        </ListGroup>
-                        <Card.Body>
-                            <Card.Link href="#">Card Link</Card.Link>
-                            <Card.Link href="#">Another Link</Card.Link>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '16rem' }}>
-                        <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </Card.Text>
-                        </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                        </ListGroup>
-                        <Card.Body>
-                            <Card.Link href="#">Card Link</Card.Link>
-                            <Card.Link href="#">Another Link</Card.Link>
-                        </Card.Body>
-                    </Card>
+                    {
+                        services.map(service => {
+                            return (<Card className='me-3 mb-3 ' style={{ width: '16rem' }}>
+                                <Card.Img variant="top" src={service.photoURL} />
+                                <Card.Body>
+                                    <Card.Title>Package: {service.serviceName}</Card.Title>
+                                    <Card.Text>
+                                        <strong>Description:</strong> {service.description.slice(0, 100) + "..."}
+                                    </Card.Text>
+                                </Card.Body>
+                                <ListGroup className="list-group-flush">
+                                    <ListGroup.Item><strong>Spot:</strong> {service.spot}</ListGroup.Item>
+                                    <ListGroup.Item><strong>Days of Service:</strong> {service.days}</ListGroup.Item>
+                                    <ListGroup.Item><strong>Service Cost:</strong> ${service.payment}</ListGroup.Item>
+                                </ListGroup>
+                                <Card.Body>
 
+                                    <div className='w-full d-flex justify-content-center'>
+                                        <Link to='/servicedetails'><Button variant="primary">Take My Service</Button></Link>
+                                    </div>
+                                </Card.Body>
+                            </Card>)
+                        })
+                    }
                 </div>
             </div>
             <div className='d-flex justify-content-center w-full my-5'>

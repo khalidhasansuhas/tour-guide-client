@@ -20,7 +20,7 @@ const AddService = () => {
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" className="form-label">Your Service duration in days</label>
-                        <input name='day' type="text" class="form-control" id="exampleFormControlInput1" placeholder="in number (1-30)" required />
+                        <input name='days' type="text" class="form-control" id="exampleFormControlInput1" placeholder="in number (1-30)" required />
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" className="form-label">Your Service Cost</label>

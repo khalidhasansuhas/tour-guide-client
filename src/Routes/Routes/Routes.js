@@ -13,6 +13,10 @@ export const routes = createBrowserRouter([
     {
         path:'/',
         element: <Main></Main>,
+        loader: async ()=>{
+
+          return  fetch('http://localhost:5000/services')
+        },
         errorElement: <Error></Error>,
         children:[
             {

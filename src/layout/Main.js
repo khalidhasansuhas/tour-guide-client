@@ -1,26 +1,34 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router-dom';
 import Footer from '../Pages/Shared/Footer/Footer';
 import Header from '../Pages/Shared/Header/Header';
 import LeftSideNav from '../Pages/Shared/LeftSideNav/LeftSideNav';
 
+export const ServiceContext = createContext([])
+
 const Main = () => {
+
+    const services = useLoaderData()
+
     return (
         <div>
-            <Header></Header>
-            <Container>
-                <Row>
-                    <Col lg='3' className='d-none d-lg-block'>
-                        <LeftSideNav></LeftSideNav>
-                    </Col>
-                    <Col lg='9'>
-                        <Outlet></Outlet>
-                    </Col>
+            <ServiceContext.Provider value={services}>
 
-                </Row>
-            </Container>
-            <Footer></Footer>
+                <Header></Header>
+                <Container>
+                    <Row>
+                        <Col lg='3' className='d-none d-lg-block'>
+                            <LeftSideNav></LeftSideNav>
+                        </Col>
+                        <Col lg='9'>
+                            <Outlet></Outlet>
+                        </Col>
+
+                    </Row>
+                </Container>
+                <Footer></Footer>
+            </ServiceContext.Provider>
         </div>
     );
 };
