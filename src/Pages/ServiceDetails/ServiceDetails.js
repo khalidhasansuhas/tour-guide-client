@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
-import Slider1 from '../../assets/slider/Slider1.png';
 import Card from 'react-bootstrap/Card';
+import { FaUser } from 'react-icons/fa';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
@@ -9,42 +9,52 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
-  
+
     const { image, serviceName, payment, spot, description, days, _id } = useLoaderData();
+    const [comments, setComments] = useState([])
+    const [refresh, setRefresh] = useState(false)
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/comments?serviceId=${_id}`)
+            .then(res => res.json())
+            .then(data => setComments(data))
+            .catch(e => console.log(e))
+    }, [refresh, _id])
 
     const handleSubmit = (event) => {
         event.preventDefault()
         const form = event.target;
-        const name = user?.displayName ;
+        const name = user?.displayName;
         const email = user?.email;
         const photo = user?.photoURL;
         const comment = form.comment.value;
 
         const comments = {
-            serviceId : _id,
-            serviceName : serviceName,
+            serviceId: _id,
+            serviceName: serviceName,
             name: name,
             photo: photo,
             email: email,
-            comment : comment
+            comment: comment
         }
 
-        fetch('http://localhost:5000/comments',{
-            method:'POST',
-            headers:{
-                'content-type':'application/json'
+        fetch('http://localhost:5000/comments', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
             },
             body: JSON.stringify(comments)
         })
-        .then(res =>res.json())
-        .then(data =>{
-            console.log(data)
-            if(data.acknowledged){
-                alert('order placed');
-                form.reset();
-            }
-        })
-        .catch(e=>console.error(e))
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    alert('comment placed successfully');
+                    form.reset();
+                    setRefresh(!refresh)
+                }
+            })
+            .catch(e => console.error(e))
     }
 
     return (
@@ -58,39 +68,36 @@ const ServiceDetails = () => {
                     <p className="card-text"><strong>Transport: </strong> Any</p>
                     <p className="card-text"> <strong>Rate:</strong> ${payment}</p>
                     <p className="card-text"><strong>Description:</strong> {description}</p>
-                   
+
                 </div>
             </div>
             <h2 className='text-center'>Reviews</h2>
 
 
             <div className='p-3 border border-secondary mb-5'>
-                <Card className='mb-2'>
-                    <Card.Header className='d-flex align-items-center h-100 '>
+                {
+                    comments.map(comment => {
+                        return (
+                            <Card className='mb-2'>
+                                <Card.Header className='d-flex align-items-center h-100 '>
 
-                        <Image style={{ height: '50px', width: "50px" }} roundedCircle src={Slider1} ></Image>
-                        <h4 className='ps-3'>fedrik john</h4>
-                    </Card.Header>
-                    <Card.Body>
-                        <Card.Title>Special title treatment</Card.Title>
-                        <Card.Text>
-                            With supporting text below as a natural lead-in to additional content.
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-                <Card className='mb-2'>
-                    <Card.Header className='d-flex align-items-center h-100 '>
+                                    <Image style={{ height: '50px', width: "50px" }} roundedCircle src={comment?.photo
+                                        ? comment?.photo
+                                        : <FaUser></FaUser>
+                                    } ></Image>
+                                    <h5 className='ps-3'>{comment.name}</h5>
+                                </Card.Header>
+                                <Card.Body>
 
-                        <Image style={{ height: '50px', width: "50px" }} roundedCircle src={Slider1} ></Image>
-                        <h4 className='ps-3'>fedrik john</h4>
-                    </Card.Header>
-                    <Card.Body>
-                        <Card.Title>Special title treatment</Card.Title>
-                        <Card.Text>
-                            With supporting text below as a natural lead-in to additional content.
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                                    <Card.Text>
+                                        {comment.comment}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        )
+                    })
+                }
+
                 <div className='p-3 mt-5 border border-secondary'>
                     {
                         user?.uid ?

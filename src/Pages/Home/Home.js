@@ -1,5 +1,5 @@
 import React, {  } from 'react';
-import { Button, Card, Carousel, ListGroup } from 'react-bootstrap';
+import { Button, Card, Carousel, Image, ListGroup } from 'react-bootstrap';
 import Slider2 from '../../assets/slider/Slider2.jpg';
 import Slider3 from '../../assets/slider/Slider3.jpg';
 import Slider4 from '../../assets/slider/Slider4.jpg';
@@ -24,7 +24,7 @@ const Home = () => {
 
                 </Carousel.Item>
                 <Carousel.Item interval={500} style={{ height: '200' }}>
-                    <img
+                    <Image
                         fluid
                         className="d-block w-100"
                         src={Slider2}
@@ -32,7 +32,7 @@ const Home = () => {
                     />
                 </Carousel.Item>
                 <Carousel.Item style={{ height: '200' }}>
-                    <img
+                    <Image
                         fluid
                         className="d-block w-100"
                         src={Slider3}
@@ -40,7 +40,7 @@ const Home = () => {
                     />
                 </Carousel.Item>
                 <Carousel.Item style={{ height: '200' }}>
-                    <img
+                    <Image
                         fluid
                         className="d-block w-100"
                         src={Slider4}
@@ -48,7 +48,7 @@ const Home = () => {
                     />
                 </Carousel.Item>
                 <Carousel.Item style={{ height: '200' }}>
-                    <img
+                    <Image
                         fluid
                         className="d-block w-100"
                         src={Slider5}
