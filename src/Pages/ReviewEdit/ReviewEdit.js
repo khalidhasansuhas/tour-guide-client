@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const ReviewEdit = () => {
+    const navigate = useNavigate();
 
     const router = useParams()
 
@@ -24,6 +25,22 @@ const ReviewEdit = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        const comment = {
+            comment: event.target.comment.value
+        };
+        fetch(`http://localhost:5000/comments/${id}`,{
+            method: "PATCH",
+            headers:{
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(comment)
+        })
+        .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                navigate('/myreviews')
+            })
+            .catch(e => console.log(e))
 
     }
 
