@@ -14,19 +14,9 @@ const MyReviews = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comments?email=${email}`, {
-            headers: {
-                suthorization: `Bearer ${localStorage.getItem('tour-guide')}`
-            }
-        })
-            .then(res => {
-                if (res.status === 401 || res.status === 403) {
-
-                    return logOut()
-                }
-                res.json()
-            })
-            .then(data => setComments(data))
+        fetch(`http://localhost:5000/comments?email=${email}`)
+            .then(res => res.json())
+            .then(data => {setComments(data)})
             .catch(e => console.log(e))
     }, [email, refresh, logOut])
 

@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Image, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import Tg from '../../../assets/Tg.jpg';
 
 
 const Header = () => {
@@ -18,10 +19,15 @@ const Header = () => {
     return (
 
 
-
+        <>
+        
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
             <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Link to='/home'><Navbar.Brand >
+                    <Image className='w-25' src={Tg}></Image>
+                    
+                </Navbar.Brand></Link>
+                
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
@@ -54,6 +60,8 @@ const Header = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        
+        </>
     );
 }
 

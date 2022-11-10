@@ -40,7 +40,7 @@ const Footer = () => {
                                 data-ripple-color="light"
                             >
                                 <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/fluid/city/113.webp"
+                                    src="https://porzoton.com/wp-content/uploads/2020/03/Coxs-Bazar-Sea-Beach-00.jpg"
                                     className="w-100"
                                     alt=''
                                 />
@@ -58,7 +58,7 @@ const Footer = () => {
                                 data-ripple-color="light"
                             >
                                 <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/fluid/city/111.webp"
+                                    src="https://prod-media-eng.dhakatribune.com/uploads/2020/09/9-new-project-1599296482873.jpg"
                                     className="w-100"
                                     alt=''
                                 />
@@ -76,7 +76,7 @@ const Footer = () => {
                                 data-ripple-color="light"
                             >
                                 <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/fluid/city/112.webp"
+                                    src="https://i.ytimg.com/vi/LNSZjsjeTog/maxresdefault.jpg"
                                     className="w-100"
                                     alt=''
                                 />
@@ -94,7 +94,7 @@ const Footer = () => {
                                 data-ripple-color="light"
                             >
                                 <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/fluid/city/114.webp"
+                                    src="https://i.pinimg.com/originals/36/e7/fd/36e7fd49ef72514751dae238ca8537f2.jpg"
                                     className="w-100"
                                     alt=''
                                 />
@@ -112,7 +112,7 @@ const Footer = () => {
                                 data-ripple-color="light"
                             >
                                 <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/fluid/city/115.webp"
+                                    src="https://new-media.dhakatribune.com/en/uploads/2022/02/05/sajek-pic-1-1598953304911.jpeg"
                                     className="w-100"
                                     alt=''
                                 />
@@ -130,7 +130,7 @@ const Footer = () => {
                                 data-ripple-color="light"
                             >
                                 <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/fluid/city/116.webp"
+                                    src="https://porzoton.com/wp-content/uploads/elementor/thumbs/Shat_Gombuj_Mosque-oyxcq1vua6d3su8tm6ge4ebfdtmz78q2jqjvy1g5cu.jpg"
                                     className="w-100"
                                     alt=''
                                 />

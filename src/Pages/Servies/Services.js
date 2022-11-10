@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Button, Card, ListGroup, Spinner } from 'react-bootstrap';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
 import { ServiceContext } from '../../layout/Main';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const Services = () => {
     const services = useContext(ServiceContext)
@@ -23,7 +25,12 @@ const Services = () => {
                     {
                         services.map(service => {
                             return (<Card className='me-3 mb-3 ' style={{ width: '16rem' }}>
+                                <PhotoProvider>
+                                <PhotoView src={service.image}>
+                                    
                                 <Card.Img variant="top" src={service.image} />
+                                </PhotoView>
+                                </PhotoProvider>
                                 <Card.Body>
                                     <Card.Title>Package: {service.serviceName}</Card.Title>
                                     <Card.Text>
