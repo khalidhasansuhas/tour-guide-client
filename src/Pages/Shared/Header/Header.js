@@ -28,8 +28,13 @@ const Header = () => {
                         <Link type="button" className='btn btn-light' to='/home'>Home</Link>
                         <Link type="button" className='btn btn-light' to='/services'>Services</Link>
                         <Link type="button" className='btn btn-light' to='/blogs'>Blogs</Link>
-                        <Link type="button" className='btn btn-light' to='/myreviews'>My Reviews</Link>
-                        <Link type="button" className='btn btn-light' to='/addservice'>Add Service</Link>
+
+                        {
+                            user?.uid && <>
+                                <Link type="button" className='btn btn-light' to='/myreviews'>My Reviews</Link>
+                                <Link type="button" className='btn btn-light' to='/addservice'>Add Service</Link>
+                            </>
+                        }
                     </Nav>
                     <Nav>
                         {

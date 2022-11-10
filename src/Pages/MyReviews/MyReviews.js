@@ -1,32 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const MyReviews = () => {
-    const { user } = useContext(AuthContext)
-    const {  email } = user
+    const { user, loading } = useContext(AuthContext)
+    const { email } = user
     const [comments, setComments] = useState([])
+    const [refresh, setRefresh] = useState(false)
 
+   
     useEffect(() => {
         fetch(`http://localhost:5000/comments?email=${email}`)
             .then(res => res.json())
             .then(data => setComments(data))
             .catch(e => console.log(e))
-    }, [email])
+    }, [email, refresh])
 
-    const handleDelete = (id) =>{
-        fetch(`http://localhost:5000/comments/${id}`,{
-            method:"DELETE"
-        })
-        .then(res =>res.json())
-        .then(data =>console.log(data))
-        .catch(e=>console.log(e))
+    const handleDelete = (id) => {
+        const proceed = window.confirm('Are You sure you want to delete?')
+        if(proceed){
+            fetch(`http://localhost:5000/comments/${id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount) {
+                        alert('Review deleted successfully')
+                        setRefresh(!refresh)
+                    }
+                })
+                .catch(e => console.log(e))
+        }
+        
+    }
+    const navigate = useNavigate()
+    const handleEdit = (id) => {
+        navigate(`/myreviews/edit/${id}`)
+    }
+    if(loading){
+        return <Spinner className='d-flex mx-auto pt-5 my-5' animation="border" variant="primary"></Spinner>
     }
 
     return (
         <>
-        <h4 className='text-center mt-5'> Your Reviews in All Services</h4>
+            <h4 className='text-center mt-5'> Your Reviews in All Services</h4>
             <Table striped bordered responsive hover className='my-2'>
                 <thead>
                     <tr>
@@ -47,8 +66,8 @@ const MyReviews = () => {
                                     <td>{comment.comment}</td>
                                     <td >
                                         <div className="btn-group d-flex " role="group" aria-label="Basic example">
-                                            <Link to='/myreviews'><button type="button" className="btn btn-primary">Edit</button></Link>
-                                            <button onClick={()=> handleDelete(comment._id)} type="button" className="btn btn-danger">Delete</button>
+                                            <Link to={`/myreviews/edit/${comment._id}`}><button onClick={()=> handleEdit(comment._id)} type="button" className="btn btn-primary">Edit</button></Link>
+                                            <button onClick={() => handleDelete(comment._id)} type="button" className="btn btn-danger">Delete</button>
 
                                         </div>
                                     </td>

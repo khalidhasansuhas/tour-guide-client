@@ -5,9 +5,11 @@ import Blogs from "../../Pages/Blogs/Blogs";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import MyReviews from "../../Pages/MyReviews/MyReviews";
+import ReviewEdit from "../../Pages/ReviewEdit/ReviewEdit";
 import ServiceDetails from "../../Pages/ServiceDetails/ServiceDetails";
 import Services from "../../Pages/Servies/Services";
 import Error from "../../Pages/Shared/Error/Error";
+import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 
 export const routes = createBrowserRouter([
     {
@@ -45,11 +47,15 @@ export const routes = createBrowserRouter([
             },
             {
                 path:'/addservice',
-                element: <AddService></AddService>
+                element: <PrivateRoute><AddService></AddService></PrivateRoute>
             },
             {
                 path:'/myreviews',
-                element: <MyReviews></MyReviews>
+                element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>
+            },
+            {
+                path:'/myreviews/edit/:id',
+                element:<PrivateRoute><ReviewEdit></ReviewEdit></PrivateRoute>
             },
             {
                 path:'/login',
