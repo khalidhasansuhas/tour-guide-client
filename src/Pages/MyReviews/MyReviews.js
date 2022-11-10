@@ -10,7 +10,7 @@ const MyReviews = () => {
     const [comments, setComments] = useState([])
     const [refresh, setRefresh] = useState(false)
 
-   
+
     useEffect(() => {
         fetch(`http://localhost:5000/comments?email=${email}`)
             .then(res => res.json())
@@ -20,7 +20,7 @@ const MyReviews = () => {
 
     const handleDelete = (id) => {
         const proceed = window.confirm('Are You sure you want to delete?')
-        if(proceed){
+        if (proceed) {
             fetch(`http://localhost:5000/comments/${id}`, {
                 method: "DELETE"
             })
@@ -33,19 +33,24 @@ const MyReviews = () => {
                 })
                 .catch(e => console.log(e))
         }
-        
+
     }
     const navigate = useNavigate()
     const handleEdit = (id) => {
         navigate(`/myreviews/edit/${id}`)
     }
-    if(loading){
+    if (loading) {
         return <Spinner className='d-flex mx-auto pt-5 my-5' animation="border" variant="primary"></Spinner>
     }
 
     return (
         <>
-            <h4 className='text-center mt-5'> Your Reviews in All Services</h4>
+            {
+                comments?.length ? <><h4 className='text-center mt-5'> Your Reviews in All Services</h4></>
+                    :
+                    <><h4 className='text-center mt-5'> 'No reviews were added' </h4></>
+            }
+
             <Table striped bordered responsive hover className='my-2'>
                 <thead>
                     <tr>
@@ -66,7 +71,7 @@ const MyReviews = () => {
                                     <td>{comment.comment}</td>
                                     <td >
                                         <div className="btn-group d-flex " role="group" aria-label="Basic example">
-                                            <Link to={`/myreviews/edit/${comment._id}`}><button onClick={()=> handleEdit(comment._id)} type="button" className="btn btn-primary">Edit</button></Link>
+                                            <Link to={`/myreviews/edit/${comment._id}`}><button onClick={() => handleEdit(comment._id)} type="button" className="btn btn-primary">Edit</button></Link>
                                             <button onClick={() => handleDelete(comment._id)} type="button" className="btn btn-danger">Delete</button>
 
                                         </div>

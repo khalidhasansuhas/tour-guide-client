@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
@@ -9,10 +9,9 @@ const ReviewEdit = () => {
     const router = useParams()
 
     const { id } = router;
-    const { user, loading } = useContext(AuthContext)
-    const { email } = user
+    const { loading } = useContext(AuthContext)
+  
     const [comment, setComment] = useState({})
-    const [refresh, setRefresh] = useState(false)
 
     console.log(comment)
 
@@ -21,13 +20,15 @@ const ReviewEdit = () => {
             .then(res => res.json())
             .then(data => setComment(data))
             .catch(e => console.log(e))
-    }, [id, refresh])
+    }, [id])
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        const value =event.target.comment.value
         const comment = {
-            comment: event.target.comment.value
+            comment: value
         };
+
         fetch(`http://localhost:5000/comments/${id}`,{
             method: "PATCH",
             headers:{
@@ -37,11 +38,16 @@ const ReviewEdit = () => {
         })
         .then(res => res.json())
             .then(data => {
-                console.log(data)
-                navigate('/myreviews')
+                if(data.modifiedCount){
+
+                    navigate('/myreviews')
+                }
             })
             .catch(e => console.log(e))
 
+    }
+    if(loading){
+        return <Spinner className='d-flex mx-auto pt-5 my-5' animation="border" variant="primary"></Spinner>
     }
 
     return (
