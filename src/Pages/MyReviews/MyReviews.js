@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
 
@@ -14,7 +15,7 @@ const MyReviews = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comments?email=${email}`)
+        fetch(`https://tour-guide-server-mu.vercel.app/comments?email=${email}`)
             .then(res => res.json())
             .then(data => {setComments(data)})
             .catch(e => console.log(e))
@@ -23,13 +24,17 @@ const MyReviews = () => {
     const handleDelete = (id) => {
         const proceed = window.confirm('Are You sure you want to delete?')
         if (proceed) {
-            fetch(`http://localhost:5000/comments/${id}`, {
+            fetch(`https://tour-guide-server-mu.vercel.app/comments/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount) {
-                        alert('Review deleted successfully')
+                        Swal.fire(
+                            'Good job!',
+                            'Your review is deleted!',
+                            'success'
+                          )
                         setRefresh(!refresh)
                     }
                 })

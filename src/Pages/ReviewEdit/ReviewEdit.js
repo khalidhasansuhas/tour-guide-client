@@ -18,7 +18,7 @@ const ReviewEdit = () => {
     console.log(comment)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comments/${id}`)
+        fetch(`https://tour-guide-server-mu.vercel.app/comments/${id}`)
             .then(res => res.json())
             .then(data => setComment(data))
             .catch(e => console.log(e))
@@ -31,7 +31,7 @@ const ReviewEdit = () => {
             comment: value
         };
 
-        fetch(`http://localhost:5000/comments/${id}`,{
+        fetch(`https://tour-guide-server-mu.vercel.app/comments/${id}`,{
             method: "PATCH",
             headers:{
                 "content-type": "application/json"

@@ -17,7 +17,7 @@ const ServiceDetails = () => {
     const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comments?serviceId=${_id}`)
+        fetch(`https://tour-guide-server-mu.vercel.app/comments?serviceId=${_id}`)
             .then(res => res.json())
             .then(data => setComments(data))
             .catch(e => console.log(e))
@@ -40,7 +40,7 @@ const ServiceDetails = () => {
             comment: comment
         }
 
-        fetch('http://localhost:5000/comments', {
+        fetch('https://tour-guide-server-mu.vercel.app/comments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

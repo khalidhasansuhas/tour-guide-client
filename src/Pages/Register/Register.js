@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
-import { Col, Image, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+import { Col, Image, OverlayTrigger, Row, Spinner, Tooltip } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {  FaGoogle } from 'react-icons/fa';
@@ -9,13 +9,15 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import {  GoogleAuthProvider } from 'firebase/auth';
 import Registerimg from '../../assets/Registerimg.png';
 import Tg from '../../assets/Tg.jpg';
+import useTitle from '../../hooks/useTitle';
 
 const Register = () => {
 
-
+    
     const [error, setError] = useState('')
-    const { createUser, updateUserProfile, providerLogin } = useContext(AuthContext);
+    const { createUser, updateUserProfile, providerLogin,loading } = useContext(AuthContext);
     const navigate = useNavigate();
+    useTitle('Register')
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -61,7 +63,9 @@ const Register = () => {
             })
             .catch(error => console.error(error))
     }
-
+    if (loading) {
+        return <Spinner className='d-flex mx-auto pt-5 my-5' animation="border" variant="primary"></Spinner>
+    }
 
     return (
         <>

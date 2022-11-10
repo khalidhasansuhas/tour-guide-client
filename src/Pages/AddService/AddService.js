@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
 
@@ -29,7 +30,7 @@ const AddService = () => {
             description: description
         }
         console.log(services)
-        fetch('http://localhost:5000/services', {
+        fetch('https://tour-guide-server-mu.vercel.app/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -40,7 +41,11 @@ const AddService = () => {
             .then(data => {
                 console.log(data)
                 if (data.acknowledged) {
-                    alert('comment placed successfully');
+                    Swal.fire(
+                        'Good job!',
+                        'You Have added a new service!',
+                        'success'
+                      )
                     form.reset();
                 }
             })
@@ -50,7 +55,7 @@ const AddService = () => {
     return (
         <>
             <div className='p-5 mt-5 border border-secondary'>
-                <h3 className='text-center pb-5'>{user.displayName}</h3>
+                <h3 className='text-center pb-5'>{user.displayName}, please add a service</h3>
 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
@@ -82,7 +87,7 @@ const AddService = () => {
                         <textarea name='description' type="text" className="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
                     </div>
                     <div className='w-100 d-flex justify-content-center'>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary">Add a Service</button>
                     </div>
 
                 </form>

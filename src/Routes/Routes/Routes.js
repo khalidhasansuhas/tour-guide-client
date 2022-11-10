@@ -18,19 +18,19 @@ export const routes = createBrowserRouter([
         element: <Main></Main>,
         loader: async ()=>{
 
-          return  fetch('http://localhost:5000/services')
+          return  fetch('https://tour-guide-server-mu.vercel.app/services')
         },
         errorElement: <Error></Error>,
         children:[
             {
                 path:'/',
                 element:<Home></Home>,
-                loader:()=> fetch('http://localhost:5000/servicesLimit')
+                loader:()=> fetch('https://tour-guide-server-mu.vercel.app/servicesLimit')
             },
             {
                 path:'/home',
                 element:<Home></Home>,
-                loader:()=> fetch('http://localhost:5000/servicesLimit')
+                loader:()=> fetch('https://tour-guide-server-mu.vercel.app/servicesLimit')
                 
             },
             {
@@ -40,7 +40,7 @@ export const routes = createBrowserRouter([
             {
                 path:'/services/:id',
                 element:<ServiceDetails></ServiceDetails>,
-                loader: ({params})=> fetch (`http://localhost:5000/services/${params.id}`)
+                loader: ({params})=> fetch (`https://tour-guide-server-mu.vercel.app/${params.id}`)
             },
             {
                 path:'/blogs',

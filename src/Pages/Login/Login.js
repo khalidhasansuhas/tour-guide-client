@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { Col, Image, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+import { Col, Image, OverlayTrigger, Row, Spinner, Tooltip } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGoogle } from 'react-icons/fa';
@@ -12,7 +12,7 @@ import Registerimg from '../../assets/Registerimg.png';
 import Tg from '../../assets/Tg.jpg';
 
 const Login = () => {
-    const { providerLogin } = useContext(AuthContext);
+    const { providerLogin , loading } = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -37,7 +37,7 @@ const Login = () => {
                 const currentUser = {
                     email: user.email
                 }
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://tour-guide-server-mu.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': "application/json"
@@ -52,6 +52,8 @@ const Login = () => {
                         setError('');
                         localStorage.setItem('tour-guide', data.token);
                         navigate(from, { replace: true })
+                        
+
                     });
 
             })
@@ -76,6 +78,9 @@ const Login = () => {
     // if (loading) {
     //     return <Spinner className='d-flex mx-auto pt-5 my-5' animation="border" variant="primary"></Spinner>
     // }
+    if (loading) {
+        return <Spinner className='d-flex mx-auto pt-5 my-5' animation="border" variant="primary"></Spinner>
+    }
 
     return (
         <>

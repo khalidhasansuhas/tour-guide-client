@@ -61,6 +61,7 @@ const Home = () => {
                     />
                 </Carousel.Item>
             </Carousel>
+            <h4 className='text-center my-3'>Our Services</h4>
             <div className='w-full d-flex'>
                 <div className='d-flex flex-wrap w-full mx-auto'>
                     {
