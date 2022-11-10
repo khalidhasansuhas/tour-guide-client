@@ -1,21 +1,20 @@
-import React, { useContext } from 'react';
-import { Button, Card, Carousel, Image, ListGroup, Spinner } from 'react-bootstrap';
+import React from 'react';
+import { Button, Card, Carousel, Image, ListGroup } from 'react-bootstrap';
 import Slider2 from '../../assets/slider/Slider2.jpg';
 import Slider3 from '../../assets/slider/Slider3.jpg';
 import Slider4 from '../../assets/slider/Slider4.jpg';
 import Slider5 from '../../assets/slider/Slider5.jpg';
 import Slider1 from '../../assets/slider/Slider1.png';
 import { Link, useLoaderData } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const Home = () => {
-    const { loading } = useContext(AuthContext)
+    // const { loading } = useContext(AuthContext)
 
+    useTitle('Home')
     const services = useLoaderData()
 
-    if (loading) {
-        return <Spinner className='d-flex mx-auto pt-5 my-5' animation="border" variant="primary"></Spinner>
-    }
+    
     return (
         <>
             <Carousel className='my-5 ' style={{ height: '200' }}>

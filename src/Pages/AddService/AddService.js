@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 // const handleSubmit= (e) =>{
 //     e.preventDefault()
 // }
 const AddService = () => {
     const {user} = useContext(AuthContext)
+    useTitle('Add Service')
 
     const handleSubmit = event =>{
         event.preventDefault()
@@ -26,7 +28,7 @@ const AddService = () => {
             email : email,
             description: description
         }
-        
+        console.log(services)
         fetch('http://localhost:5000/services', {
             method: 'POST',
             headers: {

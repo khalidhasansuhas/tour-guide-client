@@ -1,10 +1,18 @@
 import React, { useContext } from 'react';
-import { Button, Card, ListGroup } from 'react-bootstrap';
+import { Button, Card, ListGroup, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 import { ServiceContext } from '../../layout/Main';
 
 const Services = () => {
     const services = useContext(ServiceContext)
+    const {loading} = useContext(AuthContext);
+    useTitle('Services')
+
+    if (loading) {
+        return <Spinner className='d-flex mx-auto pt-5 my-5' animation="border" variant="primary"></Spinner>
+    }
 
     return (
         <>

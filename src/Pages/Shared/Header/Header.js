@@ -27,7 +27,7 @@ const Header = () => {
                     <Nav className="me-auto">
                         <Link type="button" className='btn btn-light' to='/home'>Home</Link>
                         <Link type="button" className='btn btn-light' to='/services'>Services</Link>
-                        <Link type="button" className='btn btn-light' to='/blogs'>Blogs</Link>
+                        <Link type="button" className='btn btn-light' to='/blogs'>Blog</Link>
 
                         {
                             user?.uid && <>

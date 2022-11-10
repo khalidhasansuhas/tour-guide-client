@@ -4,11 +4,13 @@ import Card from 'react-bootstrap/Card';
 import { FaUser } from 'react-icons/fa';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 
 
 const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
+    useTitle('Service Details')
 
     const { image, serviceName, payment, spot, description, days, _id } = useLoaderData();
     const [comments, setComments] = useState([])

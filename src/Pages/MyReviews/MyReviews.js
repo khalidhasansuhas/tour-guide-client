@@ -3,12 +3,14 @@ import { Spinner } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const MyReviews = () => {
     const { user, loading } = useContext(AuthContext)
     const { email } = user
     const [comments, setComments] = useState([])
     const [refresh, setRefresh] = useState(false)
+    useTitle('MyReviews')
 
 
     useEffect(() => {

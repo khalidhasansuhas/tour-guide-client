@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const ReviewEdit = () => {
     const navigate = useNavigate();
+    useTitle('Edit Review')
 
     const router = useParams()
 
